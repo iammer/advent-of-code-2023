@@ -5,3 +5,6 @@
 * `.map.with_index`
 * `.cycle`
 * `.lcm`
+* Ruby threads aren't threads due to GIL
+* `.transpose`
+
