@@ -33,9 +33,7 @@ class Hand
   end
 
   def base_strength
-    card_counts = @cards.reject { |c| c == 1 }
-      .each_with_object(15.times.map { 0 }) { |card, counts| counts[card] += 1 }
-      .sort.reverse.first(2)
+    card_counts = @cards.reject { |c| c == 1 }.tally.values.push(0,0).sort.reverse.first(2)
 
     card_counts[0] += @cards.count(1)
 
@@ -61,4 +59,4 @@ end
 puts ARGF.each_line.map { |line| Hand.new(line) }
   .sort_by(&:strength)
   .map.with_index { |hand, i| hand.bid * (i+1) }
-  .reduce(:+)
+  .sum

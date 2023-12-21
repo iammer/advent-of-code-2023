@@ -1,19 +1,15 @@
 #!/usr/bin/env ruby
-answer = 0
 
-ARGF.each_line do |line|
-  line.chomp!
-  game, cubes = line.split(':')
+answer = ARGF.each_line.map do |line|
+  game, cubes = line.chomp.split(':')
 
   rounds=cubes.split(';').map do |round|
     round.scan(/(\d+) (\w+)/).to_h { |a,b| [b,a] }
   end
 
-  answer += ['red','green','blue'].map do |color|
+  ['red','green','blue'].map do |color|
     rounds.map { |r| r[color].to_i }.max
   end.reduce(:*)
-end
+end.sum
 
 puts answer
-
-

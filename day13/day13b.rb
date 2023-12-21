@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-require 'pry'
-require 'pry-nav'
 
 class Map
   def self.from_s(s)

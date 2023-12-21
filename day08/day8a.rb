@@ -6,8 +6,12 @@ ARGF.readline
 class Node
   attr_reader :name, :left, :right
 
-  def initialize(line)
-    @name, @left, @right = line.match(/(\w{3}) = \((\w{3}), (\w{3})\)/).to_a[1..-1]
+  def self.from_s(s)
+    new(*s.scan(/(\w{3}) = \((\w{3}), (\w{3})\)/).first)
+  end
+
+  def initialize(*args)
+    @name, @left, @right = args
   end
 
   def next(map, dir)
@@ -19,9 +23,10 @@ class Node
   end
 end
 
-nodes = ARGF.each_line.map { |line| Node.new(line) }.to_h { |n| [n.name, n] }
+nodes = ARGF.each_line.map { |line| Node.from_s(line) }.to_h { |n| [n.name, n] }
 
 node = nodes['AAA']
+
 step_count = 0
 while !node.end?
   node = node.next(nodes, steps.next)

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+
 class RangeMap
   def initialize
     @entries = []
@@ -59,11 +60,9 @@ end
 
 order = %w[seed soil fertilizer water light temperature humidity location]
 locations = seeds
-order[0...-1].zip(order[1..-1]).each do |src,dest|
+order.each_cons(2) do |src,dest|
   map = maps["#{src}-to-#{dest}"]
   locations = locations.map(&map.method(:map_to))
 end
 
 puts locations.min
-
-

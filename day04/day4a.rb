@@ -2,9 +2,7 @@
 answer = 0
 
 ARGF.each_line do |line|
-  line.chomp!
-
-  card, wining_numbers_section, have_numbers_section = line.split(/[:|]/)
+  card, wining_numbers_section, have_numbers_section = line.chomp.split(/[:|]/)
   wining_numbers = wining_numbers_section.split
   have_numbers = have_numbers_section.split
 
@@ -13,6 +11,3 @@ ARGF.each_line do |line|
 end
 
 puts answer
-
-
-

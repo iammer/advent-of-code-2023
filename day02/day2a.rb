@@ -9,20 +9,15 @@ max = {
 }
 
 ARGF.each_line do |line|
-  line.chomp!
-  game, cubes = line.split(':')
+  game, cubes = line.chomp.split(':')
   rounds = cubes.split(';')
-  valid = rounds.all? do |round|
+  next unless rounds.all? do |round|
     round.scan(/(\d+) (\w+)/).all? do |count, color|
       count.to_i <= max[color.to_sym]
     end
   end
 
-  next unless valid
-
   answer += game.split(' ').last.to_i
 end
 
 puts answer
-
-

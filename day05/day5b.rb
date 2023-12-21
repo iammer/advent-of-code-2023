@@ -60,10 +60,6 @@ def range_subtract(a,b)
   raise 'Something is wrong'
 end
 
-def win2(arr)
-  arr[0...-1].zip(arr[1..-1])
-end
-
 def read_seeds(line)
   line.split(': ').last.split.map(&:to_i).each_slice(2).map { |a,b| [a,a+b-1] }
 end
@@ -94,7 +90,7 @@ end
 
 order = %w[seed soil fertilizer water light temperature humidity location]
 locations = seeds
-win2(order).each do |src,dest|
+order.each_cons(2).each do |src,dest|
   map = maps["#{src}-to-#{dest}"]
   locations = map.map_to(locations)
 end

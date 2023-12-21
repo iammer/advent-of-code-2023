@@ -57,10 +57,7 @@ class Pipe
   end
 
   def enclosed?(map)
-    return false if visited
-    return false if x == 0 || y == 0
-
-    (0..x).count { |i| map[y][i].crossing? }.odd?
+    !visited && (0..x).count { |i| map[y][i].crossing? }.odd?
   end
 end
 
